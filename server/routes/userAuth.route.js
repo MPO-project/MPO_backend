@@ -1,6 +1,6 @@
-const {register } = require("../controllers/userAuth.controller");
+const {verify_email } = require("../controllers/userAuth.controller");
 const authRoutingFunction =  (router) => {
-  router.post("/users/verify-email", register);
+  router.post("/users/verify-email", verify_email);
 //   router.post("/users/verifyEmail", verifyEmail);
 //   router.post("/users/resendEmailVerification", resendEmailVerification);
 //   router.post("/users/login", login);
