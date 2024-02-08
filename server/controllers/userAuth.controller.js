@@ -5,15 +5,16 @@ const { errorResponse, successResponse } = require("../utils/libs/response");
 
 const register = tryCatch(async (req, res)=>{
    const {email} = req.body;
+   console.log(email)
     const user = await User.findOne({email});
 
     if (user){
-        successResponse(res,"email found in database please login", {}, 200 )
+         // Email exists, redirect to login page
+        res.redirect(`http://localhost:3000/login`);
     }
 
     else{
-        console.log("not found in database")
-        return errorResponse(res,"user not found, create an account",404)
+        res.redirect(`http://localhost:3000/signup`);
     }
 
 })

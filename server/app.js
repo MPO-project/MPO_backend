@@ -5,11 +5,13 @@ const { errorResponse, successResponse } = require ("./utils/libs/response.js");
 // get routes
 const routes = require ("./routes/index.js");
 const { StatusCodes } =  require("http-status-codes");
+const bodyParser = require("body-parser")
 
 // setup middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(bodyParser())
 
 
 // mount route
