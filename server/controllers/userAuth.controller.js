@@ -43,7 +43,8 @@ const verify_email = tryCatch(async (req, res)=>{
         const sent_from = process.env.EMAIL_USER;
 
             await sendEmail(subject, message, send_to, sent_from);
-            return res.redirect(`${process.env.FRONTEND_URL}/signup`);
+            // return res.redirect(`${process.env.FRONTEND_URL}/signup`);
+            return res.json({message:"success"})
     }
 
 })
