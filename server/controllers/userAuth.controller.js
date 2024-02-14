@@ -40,7 +40,7 @@ const verify_email = tryCatch(async (req, res)=>{
         `
         const subject = "CONFIRMATION OF EMAIL";
         const send_to = email;
-        const sent_from = process.env.EMAIL_USER;
+        const sent_from = "churabrady@gmail.com";
 
             await sendEmail(subject, message, send_to, sent_from);
             // return res.redirect(`${process.env.FRONTEND_URL}/signup`);

@@ -4,12 +4,13 @@ const sendEmail=async (subject, message, send_to, sent_from, reply_to)=>{
     // create email message
 
     const transporter= nodemailer.createTransport({
-        host:process.env.EMAIL_HOST,
-        port:587,
-        secure:false,
+        // host:process.env.EMAIL_HOST,
+        // port:587,
+        // secure:false,
+        service:'gmail',
         auth:{
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
+            user: "churabrado@gmail.com",
+            pass: "churabrady123?"
         },
 
         timeout: 100000, //set in milliseconds
