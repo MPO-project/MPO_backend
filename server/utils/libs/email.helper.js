@@ -9,8 +9,8 @@ const sendEmail=async (subject, message, send_to, sent_from, reply_to)=>{
         // secure:false,
         service:'gmail',
         auth:{
-            user: "churabrado@gmail.com",
-            pass: "churabrady123?"
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         },
 
         timeout: 100000, //set in milliseconds
