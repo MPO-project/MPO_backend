@@ -51,11 +51,11 @@ const verify_email = tryCatch(async (req, res)=>{
 })
 
 const verify_otp = tryCatch(async(req,res)=>{
-    const {otp} = req.body;
+    const {otp, email} = req.body;
 //    find the otp and confirm the expiry date
 const twentyMinutesAgo = new Date(Date.now() - 20 * 60000);
             // Delete OTPs where the expiration date is less than the calculated time
-           const matchOtp =  OTP.findOne({ expirationTime: { $lte: twentyMinutesAgo } });
+           const matchOtp =  OTP.findOne({ expirationTime: { $lte: twentyMinutesAgo }, email, otp });
 
            if (!matchOtp){
                 return errorResponse(res, "OTP is invalid or expired", 404)
@@ -63,7 +63,7 @@ const twentyMinutesAgo = new Date(Date.now() - 20 * 60000);
 
            else{
             // here we will redirect the user to the sign up page
-            console.log("sign up page")
+            return successResponse(res, "navigate to signup page", {}, 200)
            }
 })
-module.exports = {verify_email}
+module.exports = {verify_email, verify_otp}
