@@ -12,11 +12,11 @@ try {
     })
 
     .then(()=>{
-        setInterval(()=>{
+        setInterval(async()=>{
             const twentyMinutesAgo = new Date(Date.now() - 20 * 60000);
             // Delete OTPs where the expiration date is less than the calculated time
             console.log("deleting expired otps")
-            return OTP.deleteMany({ expirationTime: { $lte: twentyMinutesAgo } });
+            return await OTP.deleteMany({ expirationTime: { $lte: twentyMinutesAgo } });
         }, 2000*30*10*2)
     })
 } catch (error) {
