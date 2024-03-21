@@ -12,7 +12,7 @@ const verify_email = tryCatch(async (req, res)=>{
     const user = await User.findOne({email});
 
     if (user){
-       res.redirect(`${process.env.FRONTEND_URL}/login`)
+       res.redirect(`${process.env.FRONTEND_URL}/auth/signin`)
     }
 
     else{   
@@ -44,8 +44,8 @@ const verify_email = tryCatch(async (req, res)=>{
         const sent_from = "churabrado@gmail.com";
 
             await sendEmail(subject, message, send_to, sent_from);
-            // return res.redirect(`${process.env.FRONTEND_URL}/signup`);
-            return res.json({message:"success"})
+            return res.redirect(`${process.env.FRONTEND_URL}/auth/verify-otp`);
+            // return res.json({message:"success"})
     }
 
 })
@@ -63,7 +63,7 @@ const fiveMinutesAgo = Date.now() - 5 * 60000;
 
            else{
             // here we will redirect the user to the sign up page
-            return successResponse(res, "navigate to signup page", {}, 200)
+            return res.redirect()
            }
 })
 module.exports = {verify_email, verify_otp}
