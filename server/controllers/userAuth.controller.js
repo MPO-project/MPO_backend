@@ -1,4 +1,8 @@
 const tryCatch = require("../utils/libs/tryCatch")
+const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+
+const crypto = require("crypto");
 const User = require ("../models/userModel");
 const { errorResponse, successResponse } = require("../utils/libs/response");
 const speakeasy= require("speakeasy");
@@ -44,7 +48,7 @@ const verify_email = tryCatch(async (req, res)=>{
         const sent_from = "churabrado@gmail.com";
 
             await sendEmail(subject, message, send_to, sent_from);
-            return res.redirect(`${process.env.FRONTEND_URL}/auth/verify-otp`);
+            return res.redirect(`https://mpo-frontend-delta.vercel.app/auth/verify-otp`);
             // return res.json({message:"success"})
     }
 
@@ -66,4 +70,8 @@ const fiveMinutesAgo = Date.now() - 5 * 60000;
             return res.redirect()
            }
 })
-module.exports = {verify_email, verify_otp}
+
+const signup = tryCatch(async(req,res)=>{
+
+})
+module.exports = {verify_email, verify_otp, signup}
