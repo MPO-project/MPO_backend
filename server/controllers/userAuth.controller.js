@@ -57,7 +57,7 @@ const verify_email = tryCatch(async (req, res)=>{
 const verify_otp = tryCatch(async(req,res)=>{
     const {otp, email} = req.body;
 //    find the otp and confirm the expiry date
-const fiveMinutesAgo = Date.now() - 5 * 60000;
+const fiveMinutesAgo = Date.now() - 5 * 150000;
             // Delete OTPs where the expiration date is less than the calculated time
            const matchOtp = await OTP.findOne({ expirationTime: { $gte: fiveMinutesAgo }, email, otp });
             // console.log(matchOtp)
