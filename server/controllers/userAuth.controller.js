@@ -67,7 +67,8 @@ const fiveMinutesAgo = Date.now() - 5 * 60000;
 
            else{
             // here we will redirect the user to the sign up page
-            return res.redirect(`${process.env.FRONTEND_URL}/auth/signin/${email}/${otp}`)
+            // return res.redirect(`${process.env.FRONTEND_URL}/auth/signin/${email}/${otp}`)
+            return res.status(200).send("otp verification is successful")
            }
 })
 
