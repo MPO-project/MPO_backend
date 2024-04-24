@@ -1,7 +1,6 @@
 const tryCatch = require("../utils/libs/tryCatch")
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
-
 const crypto = require("crypto");
 const User = require ("../models/userModel");
 const { errorResponse, successResponse } = require("../utils/libs/response");
@@ -16,10 +15,11 @@ const verify_email = tryCatch(async (req, res)=>{
     const user = await User.findOne({email});
 
     if (user){
-       res.redirect(`${process.env.FRONTEND_URL}/auth/signin`)
+       return successResponse(res, "user already exists", user, 200)
     }
 
     else{   
+        res.status(400).send("Email not found");
         //generate otp
         const generatedOTP = speakeasy.totp({
             secret: speakeasy.generateSecret().base32,
@@ -48,8 +48,8 @@ const verify_email = tryCatch(async (req, res)=>{
         const sent_from = "churabrado@gmail.com";
 
             await sendEmail(subject, message, send_to, sent_from);
-            return res.redirect(`https://mpo-frontend-delta.vercel.app/auth/verify-otp`);
-            // return res.json({message:"success"})
+            console.log(newOTP.otp)
+            return successResponse(res, "otp", {otp:newOTP.otp}, 200);
     }
 
 })
@@ -67,7 +67,7 @@ const fiveMinutesAgo = Date.now() - 5 * 60000;
 
            else{
             // here we will redirect the user to the sign up page
-            return res.redirect()
+            return res.redirect(`${process.env.FRONTEND_URL}/auth/signin/${email}/${otp}`)
            }
 })
 
