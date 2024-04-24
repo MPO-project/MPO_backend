@@ -19,7 +19,7 @@ const verify_email = tryCatch(async (req, res)=>{
     }
 
     else{   
-        res.status(400).send("Email not found");
+        // res.status(400).send("Email not found");
         //generate otp
         const generatedOTP = speakeasy.totp({
             secret: speakeasy.generateSecret().base32,
